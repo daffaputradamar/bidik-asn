@@ -1,11 +1,10 @@
 'use client'
 
-import { SubmitHandler, useForm } from "react-hook-form";
-import { z, ZodType } from "zod"; // Add new import
+import { useForm } from "react-hook-form";
+import { z } from "zod"; // Add new import
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormRootError } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -25,7 +24,6 @@ const UserLoginSchema = z
 type UserLoginType = z.infer<typeof UserLoginSchema>;
 
 export default function FormLogin() {
-    const router = useRouter();
 
     const formLogin = useForm<UserLoginType>({
         resolver: zodResolver(UserLoginSchema),
@@ -45,7 +43,7 @@ export default function FormLogin() {
             formLogin.setError('root', {
                 message: "Invalid Credential"
             })
-        } catch (error) {
+        } catch {
             formLogin.setError('root', {
                 message: 'An error occurred during login'
             })
