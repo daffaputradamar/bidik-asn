@@ -1,0 +1,126 @@
+'use client'
+
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z, ZodType } from "zod"; // Add new import
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormRootError } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from "@/lib/utils";
+import { labelVariants } from "@/components/ui/label";
+
+const UserLoginSchema = z
+    .object({
+        email: z.string().email(),
+        password: z
+            .string()
+            .min(8, { message: "Password is too short" })
+            .max(20, { message: "Password is too long" }),
+        isRememberedPassword: z.boolean()
+    })
+
+type UserLoginType = z.infer<typeof UserLoginSchema>;
+
+export default function FormLogin() {
+    const router = useRouter();
+
+    const formLogin = useForm<UserLoginType>({
+        resolver: zodResolver(UserLoginSchema),
+        defaultValues: {
+            email: "",
+            password: "",
+            isRememberedPassword: false
+        }
+    });
+
+    const handleLogin = async (values: UserLoginType) => {
+
+        try {
+            await new Promise((resolve) => setTimeout(resolve, 1000))
+            console.log(values);
+
+            formLogin.setError('root', {
+                message: "Invalid Credential"
+            })
+        } catch (error) {
+            formLogin.setError('root', {
+                message: 'An error occurred during login'
+            })
+        }
+    }
+
+    return (
+        <Form {...formLogin}>
+            <form onSubmit={formLogin.handleSubmit(handleLogin)}>
+                <div className="space-y-12">
+
+                    <FormField
+                        control={formLogin.control}
+                        name="email"
+                        render={({ field }) =>
+                            <FormItem>
+                                <FormLabel>Alamat Email</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="example@domail.com" {...field} />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        }
+                    />
+                    <div className="space-y-4">
+                        <FormField
+                            control={formLogin.control}
+                            name="password"
+                            render={({ field }) =>
+                                <FormItem>
+                                    <div className="flex justify-between">
+                                        <FormLabel>
+                                            Password
+                                        </FormLabel>
+                                        <Link href={"#"} className={cn(labelVariants())}>Lupa Password?</Link>
+                                    </div>
+                                    <FormControl>
+                                        <Input type="password" placeholder="********" {...field} />
+                                    </FormControl>
+                                    <FormMessage />
+                                </FormItem>
+                            }
+                        />
+                        <FormField
+                            control={formLogin.control}
+                            name="isRememberedPassword"
+                            render={({ field }) => (
+                                <FormItem className="flex flex-row items-start space-x-3 space-y-0">
+                                    <FormControl>
+                                        <Checkbox
+                                            checked={field.value}
+                                            onCheckedChange={field.onChange}
+                                        />
+                                    </FormControl>
+                                    <div className="space-y-1 leading-none">
+                                        <FormLabel>
+                                            Ingatkan Password
+                                        </FormLabel>
+                                    </div>
+                                </FormItem>
+                            )}
+                        />
+
+                        <FormRootError />
+                    </div>
+
+
+                    <div className="text-center px-10">
+                        <Button type="submit" variant="default" className="w-full py-5 font-bold">Masuk</Button>
+                    </div>
+                </div>
+                <div className="text-center text-sm mt-4">
+                    Belum Punya Akun? <Link href={"#"} className="underline font-bold text-primary">Buat Akun</Link>
+                </div>
+            </form>
+        </Form>
+    )
+}
