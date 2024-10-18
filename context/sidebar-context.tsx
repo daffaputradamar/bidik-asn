@@ -1,9 +1,21 @@
-import { createContext, useContext, useState } from "react";
+import useMediaQuery from "@/hooks/use-media-query";
+import { createContext, useContext, useEffect, useState } from "react";
 
-const SidebarContext = createContext({ isOpen: false, toggleSidebar: () => {}, closeSidebar: () => {} });
+interface SidebarContextProps {
+  isOpen: boolean;
+  toggleSidebar: () => void;
+  closeSidebar: () => void;
+}
+
+const SidebarContext = createContext<SidebarContextProps | undefined>(undefined);
 
 export const SidebarProvider = ({ children }: { children: React.ReactNode }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+
+  useEffect(() => {
+    setIsOpen(isDesktop);
+  }, [isDesktop]);
 
   const toggleSidebar = () => setIsOpen((prev) => !prev);
   const closeSidebar = () => setIsOpen(false);
@@ -16,5 +28,9 @@ export const SidebarProvider = ({ children }: { children: React.ReactNode }) => 
 };
 
 export const useSidebar = () => {
-  return useContext(SidebarContext);
+  const context = useContext(SidebarContext);
+  if (!context) {
+    throw new Error("useSidebar must be used within a SidebarProvider");
+  }
+  return context;
 };

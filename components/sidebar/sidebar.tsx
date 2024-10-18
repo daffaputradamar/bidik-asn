@@ -1,86 +1,70 @@
 'use client'
 
 import { useSidebar } from "@/context/sidebar-context"
-import { Button } from "../ui/button"
-import { Sheet, SheetContent } from "../ui/sheet"
+import { buttonVariants } from "../ui/button"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "../ui/sheet"
 import useMediaQuery from "@/hooks/use-media-query"
+import Logo from "../icon/logo"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
+import { cn } from "@/lib/utils"
+import { Gauge, Gift, GridFour, ListChecks } from "@phosphor-icons/react"
 
-const SidebarContent = () => (
+const SidebarItem = ({
+    link,
+    label,
+    icon,
+    clickCallback,
+}: {
+    link: string;
+    label: string;
+    icon?: React.ReactNode; // Add the icon prop
+    clickCallback?: () => void;
+}) => {
+    const pathname = usePathname();
+    const isActive = pathname === link;
+
+    return (
+        <div className="flex group">
+            <div
+                className={cn(
+                    'w-2 rounded-r-md mr-4 transition-transform duration-300 ease-in-out transform',
+                    isActive ? 'bg-primary translate-x-0' : 'bg-transparent translate-x-[-100%]',
+                    'group-hover:bg-primary group-hover:translate-x-0'
+                )}
+            ></div>
+            <Link
+                href={link}
+                className={cn(
+                    buttonVariants({ variant: "ghost" }),
+                    "w-full justify-start py-6 text-base",
+                    isActive && "bg-primary-light text-primary-light-foreground",
+                    "transition-colors duration-300 ease-in-out"
+                )}
+                onClick={() => {
+                    if (clickCallback) clickCallback();
+                }}
+            >
+                {icon && <span className="mr-5">{icon}</span>}
+                {label}
+            </Link>
+        </div>
+    );
+}
+
+const SidebarContent = ({ title = true }: { title?: boolean }) => (
     <div className="space-y-4 py-4">
-        <div className="px-3 py-2">
-            <h2 className="mb-2 px-4 text-lg font-semibold tracking-tight">
-                Bidik ASN
-            </h2>
+        {
+            title && <div className="flex justify-center mb-12 pt-2">
+                <Logo className="h-20 w-auto" />
+            </div>
+        }
+        <div className="px-0 pr-6">
             <div className="space-y-1">
-                <Button variant="secondary" className="w-full justify-start">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mr-2 h-4 w-4"
-                    >
-                        <circle cx="12" cy="12" r="10" />
-                        <polygon points="10 8 16 12 10 16 10 8" />
-                    </svg>
-                    Beranda
-                </Button>
-                <Button variant="ghost" className="w-full justify-start">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mr-2 h-4 w-4"
-                    >
-                        <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
-                        <line x1="16" x2="16" y1="2" y2="6" />
-                        <line x1="8" x2="8" y1="2" y2="6" />
-                        <line x1="3" x2="21" y1="10" y2="10" />
-                    </svg>
-                    Kalender
-                </Button>
-                <Button variant="ghost" className="w-full justify-start">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mr-2 h-4 w-4"
-                    >
-                        <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
-                        <circle cx="12" cy="7" r="4" />
-                    </svg>
-                    Bimbel Saya
-                </Button>
-                <Button variant="ghost" className="w-full justify-start">
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="mr-2 h-4 w-4"
-                    >
-                        <path d="M21 15V6" />
-                        <path d="M18.5 18a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-                        <path d="M12 12H3" />
-                        <path d="M16 6H3" />
-                        <path d="M12 18H3" />
-                    </svg>
-                    List Harga Paket
-                </Button>
+                <SidebarItem link={"/"} label={"Beranda"} icon={<Gauge size={24} />} />
+                <SidebarItem link={"/kalender"} label={"Kalender"} icon={<GridFour size={24} />} />
+                <SidebarItem link={"/bimbel"} label={"Bimbel Saya"} icon={<Gift size={24} />} />
+                <SidebarItem link={"/list-harga-pake"} label={"List Harga Paket"} icon={<ListChecks size={24} />} />
             </div>
         </div>
     </div>
@@ -89,7 +73,7 @@ const SidebarContent = () => (
 const DesktopSidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => (
     <aside
         className={`${isSidebarOpen ? "w-64" : "w-0"
-            } overflow-y-auto border-r bg-white transition-all duration-300 ease-in-out hidden md:block`}
+            } overflow-y-auto overflow-x-hidden border-r bg-white transition-all duration-300 ease-in-out hidden md:block`}
     >
         <SidebarContent />
     </aside>
@@ -98,8 +82,18 @@ const DesktopSidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => (
 const MobileSidebar = ({ isOpen, closeSidebar }: { isOpen: boolean, closeSidebar: () => void }) => {
     return (
         <Sheet open={isOpen} onOpenChange={closeSidebar}>
-            <SheetContent side="left" className="w-64 p-0">
-                <SidebarContent />
+            <SheetContent side="left" className="w-72 py-4 px-0">
+                <SheetHeader className="px-4 mb-8 mt-4">
+                    <SheetTitle>
+                        <div className="flex justify-center">
+                            <Logo className="h-20 w-auto" />
+                        </div>
+                    </SheetTitle>
+                    <SheetDescription className="hidden">
+                        Bidik ASN website
+                    </SheetDescription>
+                </SheetHeader>
+                <SidebarContent title={false} />
             </SheetContent>
         </Sheet>
     )
@@ -114,7 +108,7 @@ export default function Sidebar() {
     return (
         <>
             <DesktopSidebar isSidebarOpen={isOpen} />
-            {isMobile && <MobileSidebar isOpen={isOpen} closeSidebar={closeSidebar} /> }
+            {isMobile && <MobileSidebar isOpen={isOpen} closeSidebar={closeSidebar} />}
         </>
     )
 }
