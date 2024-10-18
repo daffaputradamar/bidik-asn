@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 export default function Header() {
     return (
-        <header className="flex bg-white h-16 items-center justify-between border-b px-4 lg:px-6">
+        <header className="flex bg-white items-center justify-between border-b px-4 lg:px-6 py-2 md:py-4">
             <SidebarToggler />
             <div className="ml-auto flex items-center space-x-4">
                 <Button variant="ghost" size="icon">
