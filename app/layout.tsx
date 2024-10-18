@@ -3,8 +3,6 @@ import { Nunito_Sans } from 'next/font/google'
 import "./globals.css";
 import RootProviders from "@/providers/RootProvider";
 import { Toaster } from "@/components/ui/sonner";
-import Sidebar from "@/components/sidebar/sidebar";
-import Header from "@/components/header/header";
 
 const nunito = Nunito_Sans({ subsets: ['latin'], display: 'swap', adjustFontFallback: false })
 
@@ -24,16 +22,7 @@ export default function RootLayout({
         className={`${nunito.className} antialiased bg-gray-100/60`}
       >
         <RootProviders>
-          <div className="flex h-screen overflow-hidden">
-            <Sidebar />
-            <div className="flex flex-1 flex-col overflow-hidden">
-              {/* Header */}
-              <Header />
-              <div>
-                {children}
-              </div>
-            </div>
-          </div>
+              {children}
           <Toaster richColors position="bottom-right" />
         </RootProviders>
       </body>

@@ -16,7 +16,7 @@ const SidebarItem = ({
     icon,
     clickCallback,
 }: {
-    link: string;
+    link?: string;
     label: string;
     icon?: React.ReactNode; // Add the icon prop
     clickCallback?: () => void;
@@ -34,7 +34,7 @@ const SidebarItem = ({
                 )}
             ></div>
             <Link
-                href={link}
+                href={link || "#"}
                 className={cn(
                     buttonVariants({ variant: "ghost" }),
                     "w-full justify-start py-6 text-base",
@@ -62,9 +62,9 @@ const SidebarContent = ({ title = true }: { title?: boolean }) => (
         <div className="px-0 pr-6">
             <div className="space-y-1">
                 <SidebarItem link={"/"} label={"Beranda"} icon={<Gauge size={24} />} />
-                <SidebarItem link={"/kalender"} label={"Kalender"} icon={<GridFour size={24} />} />
-                <SidebarItem link={"/bimbel"} label={"Bimbel Saya"} icon={<Gift size={24} />} />
-                <SidebarItem link={"/list-harga-pake"} label={"List Harga Paket"} icon={<ListChecks size={24} />} />
+                <SidebarItem label={"Kalender"} icon={<GridFour size={24} />} />
+                <SidebarItem label={"Bimbel Saya"} icon={<Gift size={24} />} />
+                <SidebarItem label={"List Harga Paket"} icon={<ListChecks size={24} />} />
             </div>
         </div>
     </div>
