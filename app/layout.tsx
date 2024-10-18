@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Nunito_Sans } from 'next/font/google'
 import "./globals.css";
+import RootProviders from "@/providers/RootProvider";
+import { Toaster } from "@/components/ui/sonner";
 
-const nunito = Nunito_Sans({ subsets: ['latin'] })
+const nunito = Nunito_Sans({ subsets: ['latin'], display: 'swap', adjustFontFallback: false })
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +21,10 @@ export default function RootLayout({
       <body
         className={`${nunito.className} antialiased`}
       >
-        {children}
+        <RootProviders>
+          {children}
+          <Toaster richColors position="bottom-right" />
+        </RootProviders>
       </body>
     </html>
   );

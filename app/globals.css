@@ -20,8 +20,10 @@ body {
     --card-foreground: 0 0% 3.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
-    --primary: 204.75 100% 68.63%;
+    --primary: 221.64 100% 64.12%;
     --primary-foreground: 210 40% 98%;
+    --primary-light: 204.75 100% 68.63%;
+    --primary-light-foreground: 210 40% 98%;
     --secondary: 0 0% 96.1%;
     --secondary-foreground: 0 0% 9%;
     --muted: 0 0% 96.1%;

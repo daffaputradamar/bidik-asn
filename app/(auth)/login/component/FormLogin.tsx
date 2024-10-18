@@ -53,7 +53,7 @@ export default function FormLogin() {
     return (
         <Form {...formLogin}>
             <form onSubmit={formLogin.handleSubmit(handleLogin)}>
-                <div className="space-y-12">
+                <div className="space-y-8">
 
                     <FormField
                         control={formLogin.control}
@@ -78,7 +78,7 @@ export default function FormLogin() {
                                         <FormLabel>
                                             Password
                                         </FormLabel>
-                                        <Link href={"#"} className={cn(labelVariants())}>Lupa Password?</Link>
+                                        <Link href={"/forgot-password"} className={cn(labelVariants())}>Lupa Password?</Link>
                                     </div>
                                     <FormControl>
                                         <Input type="password" placeholder="********" {...field} />
@@ -114,9 +114,6 @@ export default function FormLogin() {
                     <div className="text-center px-10">
                         <Button type="submit" variant="default" className="w-full py-5 font-bold">Masuk</Button>
                     </div>
-                </div>
-                <div className="text-center text-sm mt-4">
-                    Belum Punya Akun? <Link href={"#"} className="underline font-bold text-primary">Buat Akun</Link>
                 </div>
             </form>
         </Form>
