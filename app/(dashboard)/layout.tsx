@@ -8,11 +8,11 @@ export default function RootLayout({
 }>) {
     return (
         <>
-            <div className="flex min-h-screen">
+            <div className="flex">
                 <Sidebar />
                 <div className="flex flex-1 flex-col">
                     <Header />
-                    <main className="flex-1 overflow-y-auto p-4 mb-8 lg:p-6">
+                    <main className="flex-1 overflow-auto p-4 mb-8 lg:p-6">
                         {children}
                     </main>
                 </div>

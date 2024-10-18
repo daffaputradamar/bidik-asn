@@ -7,7 +7,7 @@ export default function Dashboard() {
       <div className="container mx-auto space-y-12">
         <BannerCarouselAd />
         <TableRiwayatPengerjaan />
-        <YoutubeAd />        
+        <YoutubeAd />  
       </div>
   );
 }

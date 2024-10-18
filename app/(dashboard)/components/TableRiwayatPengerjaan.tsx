@@ -17,7 +17,6 @@ export default function TableRiwayatPengerjaan() {
             <CardHeader className="flex flex-row items-center justify-between">
                 <CardTitle className="text-2xl font-bold">Riwayat Pengerjaan</CardTitle>
                 <div className="flex space-x-4">
-                    {/* Month Selector */}
                     <Select defaultValue={new Date().getMonth().toString()}>
                         <SelectTrigger className="w-[180px]">
                             <SelectValue placeholder="Select month" />
@@ -41,8 +40,8 @@ export default function TableRiwayatPengerjaan() {
                     <YearSelector currentYear={currentYear} selectedYear={selectedYear} setSelectedYear={setSelectedYear} />
                 </div>
             </CardHeader>
-            <CardContent>
-                <Table className="w-full">
+            <CardContent className="min-w-full overflow-x-auto">
+                <Table>
                     <TableHeader className="bg-gray-100/60 text-base">
                         <TableRow>
                             <TableHead>Pengerjaan Tryout</TableHead>
@@ -60,7 +59,7 @@ export default function TableRiwayatPengerjaan() {
                             <TableCell>423</TableCell>
                             <TableCell className="gap-5 flex flex-col md:flex-row">
                                 <Button className={cn(badgeVariants(), 'rounded-3xl bg-emerald-500 hover:bg-emerald-400 text-sm py-0 px-4 font-bold')}>Statistik & Pembahasan</Button>
-                                <Button className={cn(badgeVariants(), 'rounded-3xl bg-accent hover:bg-accent/60 text-sm py-0 px-4 font-bold')}>Kerjakan Lagi</Button> 
+                                <Button className={cn('rounded-3xl bg-amber-500 hover:bg-amber-400 text-sm py-0 px-4 font-bold')}>Kerjakan Lagi</Button> 
                             </TableCell>
                         </TableRow>
                         <TableRow>
@@ -70,7 +69,7 @@ export default function TableRiwayatPengerjaan() {
                             <TableCell>423</TableCell>
                             <TableCell className="gap-5 flex flex-col md:flex-row">
                                 <Button className={cn(badgeVariants(), 'rounded-3xl bg-emerald-500 hover:bg-emerald-400 text-sm py-0 px-4 font-bold')}>Statistik & Pembahasan</Button>
-                                <Button className={cn(badgeVariants(), 'rounded-3xl bg-accent hover:bg-accent/60 text-sm py-0 px-4 font-bold')}>Kerjakan Lagi</Button> 
+                                <Button className={cn(badgeVariants(), 'rounded-3xl bg-amber-500 hover:bg-amber-400 text-sm py-0 px-4 font-bold')}>Kerjakan Lagi</Button> 
                             </TableCell>
                         </TableRow>
                     </TableBody>
