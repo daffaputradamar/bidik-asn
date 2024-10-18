@@ -1,7 +1,9 @@
 'use client'
 import { Bell } from "@phosphor-icons/react";
 import SidebarToggler from "../sidebar/sidebar-toggler";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
     return (
@@ -12,8 +14,7 @@ export default function Header() {
                     <Bell size={24} />
                     <span className="sr-only">Notifications</span>
                 </Button>
-                <Button variant="ghost" size="icon">
-                    {/* User avatar */}
+                {/* <Button variant="ghost" size="icon">
                     <img
                         src="/placeholder.svg?height=32&width=32"
                         alt="User avatar"
@@ -22,7 +23,16 @@ export default function Header() {
                         height={32}
                     />
                     <span className="sr-only">User menu</span>
-                </Button>
+                </Button> */}
+
+                <div className="space-x-2">
+                    <Link href={"/login"} className={cn(buttonVariants({variant:"outline"}))}>
+                        Login
+                    </Link>
+                    <Link href={"/register"} className={cn(buttonVariants({variant:"default"}))}>
+                        Daftar
+                    </Link>
+                </div>
             </div>
         </header>
     )

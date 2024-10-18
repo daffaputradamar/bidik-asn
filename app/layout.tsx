@@ -4,8 +4,6 @@ import "./globals.css";
 import RootProviders from "@/providers/RootProvider";
 import { Toaster } from "@/components/ui/sonner";
 import Sidebar from "@/components/sidebar/sidebar";
-import SidebarToggler from "@/components/sidebar/sidebar-toggler";
-import { Button } from "@/components/ui/button";
 import Header from "@/components/header/header";
 
 const nunito = Nunito_Sans({ subsets: ['latin'], display: 'swap', adjustFontFallback: false })
