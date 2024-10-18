@@ -62,7 +62,7 @@ export default function FormLogin() {
                             <FormItem>
                                 <FormLabel>Alamat Email</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="example@domail.com" {...field} />
+                                    <Input placeholder="example@domain.com" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
+import { SidebarProvider } from "@/context/sidebar-context";
 
 function RootProviders({ children }: { children: ReactNode }) {
   const [queryClient] = React.useState(() => new QueryClient({}));
@@ -17,7 +18,9 @@ function RootProviders({ children }: { children: ReactNode }) {
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SidebarProvider>
+            {children}
+          </SidebarProvider>
         </ThemeProvider>
       </SessionProvider>
       <ReactQueryDevtools initialIsOpen={false} />
