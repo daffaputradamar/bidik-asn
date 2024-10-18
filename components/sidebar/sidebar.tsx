@@ -39,7 +39,7 @@ const SidebarItem = ({
                     buttonVariants({ variant: "ghost" }),
                     "w-full justify-start py-6 text-base",
                     isActive && "bg-primary-light text-primary-light-foreground",
-                    "transition-colors duration-300 ease-in-out"
+                    "transition-colors duration-300 ease-in-out text-wrap"
                 )}
                 onClick={() => {
                     if (clickCallback) clickCallback();
@@ -62,7 +62,7 @@ const SidebarContent = ({ title = true }: { title?: boolean }) => (
         <div className="px-0 pr-6">
             <div className="space-y-1">
                 <SidebarItem link={"/"} label={"Beranda"} icon={<Gauge size={24} />} />
-                <SidebarItem label={"Kalender"} icon={<GridFour size={24} />} />
+                <SidebarItem link={"/calendar"} label={"Kalender"} icon={<GridFour size={24} />} />
                 <SidebarItem label={"Bimbel Saya"} icon={<Gift size={24} />} />
                 <SidebarItem label={"List Harga Paket"} icon={<ListChecks size={24} />} />
             </div>
@@ -82,7 +82,7 @@ const DesktopSidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => (
 const MobileSidebar = ({ isOpen, closeSidebar }: { isOpen: boolean, closeSidebar: () => void }) => {
     return (
         <Sheet open={isOpen} onOpenChange={closeSidebar}>
-            <SheetContent side="left" className="w-72 py-4 px-0">
+            <SheetContent side="left" className="w-72 py-4 px-0 overflow-y-auto">
                 <SheetHeader className="px-4 mb-8 mt-4">
                     <SheetTitle>
                         <div className="flex justify-center">

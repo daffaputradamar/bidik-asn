@@ -5,7 +5,7 @@ import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious
 import { CaretLeft, CaretRight } from "@phosphor-icons/react/dist/ssr";
 import Autoplay from "embla-carousel-autoplay"
 
-export default function BannerCarousel() {
+export default function BannerCarouselAd() {
     const bannerItems = [
         {
             image: "/placeholder.svg?height=400&width=800",
