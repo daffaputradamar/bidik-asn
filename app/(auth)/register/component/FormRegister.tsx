@@ -215,7 +215,7 @@ export default function FormRegister() {
                                             disabled={provinces?.length === 0 || isLoadingProvinces}
                                         >
                                             <SelectTrigger>
-                                                <span>{(isLoadingProvinces) ? "Loading..." : formRegister.watch('province.name') || "Select Province"}</span>
+                                                <span>{(isLoadingProvinces) ? "Loading..." : formRegister.watch('province.name') || "Pilih Provinsi"}</span>
                                             </SelectTrigger>
                                             <SelectContent>
                                                 {provinces?.map((prov) => (
@@ -249,7 +249,7 @@ export default function FormRegister() {
                                         disabled={(!formRegister.getValues('province.code') && cities && cities?.length === 0 ) || isLoadingCities}
                                     >
                                         <SelectTrigger>
-                                            <span>{(isLoadingCities) ? "Loading..." : formRegister.watch('city.name') || "Select City"}</span>
+                                            <span>{(isLoadingCities) ? "Loading..." : formRegister.watch('city.name') || "Pilih Kabupaten atau Kota"}</span>
                                         </SelectTrigger>
                                         <SelectContent>
                                             {cities?.map((city) => (
@@ -281,7 +281,7 @@ export default function FormRegister() {
                                             disabled={(!formRegister.getValues('city.code') && districts && districts?.length === 0 ) || isLoadingDistricts}
                                         >
                                             <SelectTrigger>
-                                                <span>{(isLoadingDistricts) ? "Loading..." : formRegister.watch('district.name') || "Select District"}</span>
+                                                <span>{(isLoadingDistricts) ? "Loading..." : formRegister.watch('district.name') || "Pilih Kecamatan"}</span>
                                             </SelectTrigger>
                                             <SelectContent>
                                                 {districts?.map((district) => (
@@ -312,7 +312,7 @@ export default function FormRegister() {
                                         disabled={(!formRegister.getValues('village.code') && villages && villages?.length === 0 ) || isLoadingVillages}
                                     >
                                         <SelectTrigger>
-                                            <span>{(isLoadingVillages) ? "Loading..." : formRegister.watch('village.name') || "Select Village"}</span>
+                                            <span>{(isLoadingVillages) ? "Loading..." : formRegister.watch('village.name') || "Pilih Kelurahan / Desa"}</span>
                                         </SelectTrigger>
                                         <SelectContent>
                                             {villages?.map((village) => (

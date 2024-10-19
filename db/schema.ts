@@ -1,4 +1,5 @@
 import {
+  boolean,
   pgTableCreator,
   serial,
   timestamp,
@@ -11,6 +12,7 @@ export const users = createTable('users', {
   id: serial('id').primaryKey(),
   name: varchar('name', { length: 255 }).notNull(),
   email: varchar('email', { length: 255 }).notNull(),
+  isEmailVerified: boolean('is_email_verified').notNull().default(false),
   phoneNumber: varchar('phone_number', { length: 15 }).notNull(),
   password: varchar('password', { length: 255 }).notNull(),
   

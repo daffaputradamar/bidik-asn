@@ -19,7 +19,7 @@ export default function EventList({ events }: {
                     events.map((event, i) => (
                         <div key={event.id}>
                             <div className="flex gap-4 p-5">
-                                <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg`} style={{ backgroundColor: event.color}}>
+                                <div className={`w-12 h-12 min-w-[48px] min-h-[48px] rounded-full flex items-center justify-center text-white font-bold text-lg`} style={{ backgroundColor: event.color}}>
                                     {format(event.startDate, 'd')}
                                 </div>
                                 <div>

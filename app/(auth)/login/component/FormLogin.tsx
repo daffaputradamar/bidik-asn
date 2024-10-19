@@ -1,7 +1,6 @@
 'use client'
 
 import { useForm } from "react-hook-form";
-import { z } from "zod"; // Add new import
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, FormRootError } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -10,20 +9,20 @@ import Link from "next/link";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { labelVariants } from "@/components/ui/label";
-
-const UserLoginSchema = z
-    .object({
-        email: z.string().email(),
-        password: z
-            .string()
-            .min(8, { message: "Password is too short" })
-            .max(20, { message: "Password is too long" }),
-        isRememberedPassword: z.boolean()
-    })
-
-type UserLoginType = z.infer<typeof UserLoginSchema>;
+import { UserLoginSchema, UserLoginType } from "@/types/userLogin";
+import { useMutation } from "@tanstack/react-query";
+import { LoginUser } from "../action/loginUser";
+import { CircleNotch } from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function FormLogin() {
+    const router = useRouter();
+    const { data: session } = useSession();
+
+    if(session) {
+        router.push("/");
+    }
 
     const formLogin = useForm<UserLoginType>({
         resolver: zodResolver(UserLoginSchema),
@@ -34,15 +33,24 @@ export default function FormLogin() {
         }
     });
 
+    const { mutate: loginUser, isPending: isLoadingLogin } = useMutation({
+        mutationFn: LoginUser,
+        onSuccess: async (_data: boolean) => {
+            formLogin.reset();
+
+            location.reload();
+        },
+        onError: (e) => {
+            formLogin.setError('root', {
+                message: e.message
+            });
+        },
+    });
+
     const handleLogin = async (values: UserLoginType) => {
 
         try {
-            await new Promise((resolve) => setTimeout(resolve, 1000))
-            console.log(values);
-
-            formLogin.setError('root', {
-                message: "Invalid Credential"
-            })
+            loginUser(values)
         } catch {
             formLogin.setError('root', {
                 message: 'An error occurred during login'
@@ -62,7 +70,8 @@ export default function FormLogin() {
                             <FormItem>
                                 <FormLabel>Alamat Email</FormLabel>
                                 <FormControl>
-                                    <Input placeholder="example@domain.com" {...field} />
+                                    <Input 
+                                    placeholder="example@domain.com" {...field} />
                                 </FormControl>
                                 <FormMessage />
                             </FormItem>
@@ -78,10 +87,13 @@ export default function FormLogin() {
                                         <FormLabel>
                                             Password
                                         </FormLabel>
-                                        <Link href={"/forgot-password"} className={cn(labelVariants())}>Lupa Password?</Link>
+                                        <Link 
+                                        tabIndex={-1}
+                                        href={"/forgot-password"} className={cn(labelVariants())}>Lupa Password?</Link>
                                     </div>
                                     <FormControl>
-                                        <Input type="password" placeholder="********" {...field} />
+                                        <Input 
+                                        type="password" placeholder="********" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -112,7 +124,9 @@ export default function FormLogin() {
 
 
                     <div className="text-center px-10">
-                        <Button type="submit" variant="default" className="w-full py-5 font-bold">Masuk</Button>
+                        <Button type="submit" variant="default" className="w-full py-5 font-bold" disabled={isLoadingLogin}>
+                        {isLoadingLogin ? <CircleNotch className="animate-spin" size={32} weight="bold" /> : "Masuk"}
+                    </Button>
                     </div>
                 </div>
             </form>

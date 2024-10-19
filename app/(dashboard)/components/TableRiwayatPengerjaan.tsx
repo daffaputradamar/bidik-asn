@@ -14,7 +14,7 @@ export default function TableRiwayatPengerjaan() {
 
     return (
         <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
+            <CardHeader className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <CardTitle className="text-2xl font-bold">Riwayat Pengerjaan</CardTitle>
                 <div className="flex space-x-4">
                     <Select defaultValue={new Date().getMonth().toString()}>
@@ -40,7 +40,7 @@ export default function TableRiwayatPengerjaan() {
                     <YearSelector currentYear={currentYear} selectedYear={selectedYear} setSelectedYear={setSelectedYear} />
                 </div>
             </CardHeader>
-            <CardContent className="min-w-full overflow-x-auto">
+            <CardContent>
                 <Table>
                     <TableHeader className="bg-gray-100/60 text-base">
                         <TableRow>
@@ -60,16 +60,6 @@ export default function TableRiwayatPengerjaan() {
                             <TableCell className="gap-5 flex flex-col md:flex-row">
                                 <Button className={cn(badgeVariants(), 'rounded-3xl bg-emerald-500 hover:bg-emerald-400 text-sm py-0 px-4 font-bold')}>Statistik & Pembahasan</Button>
                                 <Button className={cn('rounded-3xl bg-amber-500 hover:bg-amber-400 text-sm py-0 px-4 font-bold')}>Kerjakan Lagi</Button> 
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell>Tryout Mandiri #20</TableCell>
-                            <TableCell>Lulus</TableCell>
-                            <TableCell>12.09.2019 - 12:53 PM</TableCell>
-                            <TableCell>423</TableCell>
-                            <TableCell className="gap-5 flex flex-col md:flex-row">
-                                <Button className={cn(badgeVariants(), 'rounded-3xl bg-emerald-500 hover:bg-emerald-400 text-sm py-0 px-4 font-bold')}>Statistik & Pembahasan</Button>
-                                <Button className={cn(badgeVariants(), 'rounded-3xl bg-amber-500 hover:bg-amber-400 text-sm py-0 px-4 font-bold')}>Kerjakan Lagi</Button> 
                             </TableCell>
                         </TableRow>
                     </TableBody>
