@@ -35,14 +35,20 @@ export default function FormLogin() {
 
     const { mutate: loginUser, isPending: isLoadingLogin } = useMutation({
         mutationFn: LoginUser,
-        onSuccess: async (_data: boolean) => {
+        onSuccess: async (data: { success: boolean, message?: string }) => {
+            if(!data.success) {
+                formLogin.setError('root', {
+                    message: data.message
+                });
+                return;
+            }
             formLogin.reset();
-
             location.reload();
+
         },
-        onError: (e) => {
+        onError: (_e) => {
             formLogin.setError('root', {
-                message: e.message
+                message: "An error occured during login"
             });
         },
     });

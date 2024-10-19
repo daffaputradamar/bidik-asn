@@ -8,7 +8,10 @@ export const LoginUser = async (form: UserLoginType) => {
     const parsedBody = UserLoginSchema.safeParse(form);
 
     if (!parsedBody.success) {
-        throw new Error("Bad Request");
+        return {
+            success: false,
+            message: "Bad Request"
+        }
     }
 
     try {
@@ -18,10 +21,15 @@ export const LoginUser = async (form: UserLoginType) => {
         })
     } catch(e: unknown) {
         if(e instanceof CredentialsSignin) {
-            throw new Error(e.code);
+            return {
+                success: false,
+                message: e.code
+            }
         }
     }
 
-    return true;
+    return {
+        success: true
+    };
 
 }

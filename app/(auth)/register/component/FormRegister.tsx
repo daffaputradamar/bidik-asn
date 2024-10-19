@@ -82,10 +82,16 @@ export default function FormRegister() {
 
     const  { mutate: registerUser, isPending: isLoadingRegister } = useMutation({
         mutationFn: RegisterUser,
-        onSuccess: async (data: UserRegisterType) => {
+        onSuccess: async (data: { success: boolean, message?: string, data?: UserRegisterType }) => {
+            if(!data.success) {
+                formRegister.setError('root', {
+                    message: data.message
+                })
+                return;
+            }
             formRegister.reset();
 
-            toast.success(`User ${data.email} berhasil didaftarkan, Login untuk melanjutkan`, {
+            toast.success(`User ${data.data?.email} berhasil didaftarkan, Login untuk melanjutkan`, {
                 id: "register-user",
             });
         },

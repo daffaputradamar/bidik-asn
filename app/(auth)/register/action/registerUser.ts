@@ -9,7 +9,10 @@ export const RegisterUser = async (form: UserRegisterType) => {
     const parsedBody = UserRegisterSchema.safeParse(form);
 
     if (!parsedBody.success) {
-        throw new Error("Bad Request");
+        return {
+            success: false,
+            message: "Bad Request"
+        }
     }
 
     const { email, password, name, province, city, district, village, phoneNumber } = parsedBody.data;
@@ -19,7 +22,10 @@ export const RegisterUser = async (form: UserRegisterType) => {
     });
 
     if (existedUser) {
-        throw new Error("Email already exists");
+        return {
+            success: false,
+            message: "Email already exists"
+        }
     }
 
     const passwordHash = await hashPassword(password);
@@ -41,5 +47,8 @@ export const RegisterUser = async (form: UserRegisterType) => {
 
     // revalidatePath("/admin/users");
 
-    return parsedBody.data;
+    return {
+        success: true,
+        data: parsedBody.data
+    };
 }
