@@ -68,8 +68,13 @@ const SidebarLoading = () => (
 export default function SidebarContent({ title = true }: { title?: boolean }) {
 
     const { data: session, status } = useSession();
-    const [sidebarItems, setSidebarItems] = useState<SidebarGroupType[]>([]);
-    const [openGroups, setOpenGroups] = useState<Record<number, boolean>>({})
+    const [sidebarItems, setSidebarItems] = useState<SidebarGroupType[]>(userSidebarItems);
+    const [openGroups, setOpenGroups] = useState<Record<number, boolean>>(() => {
+        return userSidebarItems.reduce((acc: Record<number, boolean>, group, index) => {
+            acc[index] = group.defaultOpen || false; // set initial state based on defaultOpen
+            return acc;
+        }, {})
+    })
     const [openSubMenus, setOpenSubMenus] = useState<Record<number, boolean>>({});
 
     useEffect(() => {
