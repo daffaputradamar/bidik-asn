@@ -1,5 +1,5 @@
 'use client'
-import { Bell } from "@phosphor-icons/react";
+import { Bell, CircleNotch } from "@phosphor-icons/react";
 import SidebarToggler from "../sidebar/sidebar-toggler";
 import {
     DropdownMenu,
@@ -25,15 +25,19 @@ export default function Header() {
                 </Button>
 
                 {
-                    status == "loading" ? <div>Loading...</div> : status == "authenticated" ?
-                        <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                                <div className="w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full cursor-pointer select-none">
-                                    <span className="text-sm text-white">{session.user?.name?.charAt(0)}</span> {/* Display the first letter of the user's name */}
-                                </div>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent className="w-56">
-                                {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                    status == "loading" ?
+                        <div className="w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full cursor-pointer select-none">
+                            <CircleNotch className="animate-spin" size={32} weight="bold" />
+                        </div>
+                        : status == "authenticated" ?
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <div className="w-10 h-10 bg-gray-300 flex items-center justify-center rounded-full cursor-pointer select-none">
+                                        <span className="text-sm text-white">{session.user?.name?.charAt(0)?.toUpperCase()}</span> {/* Display the first letter of the user's name */}
+                                    </div>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent className="w-56">
+                                    {/* <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem>
@@ -76,23 +80,23 @@ export default function Header() {
                                 <DropdownMenuItem>GitHub</DropdownMenuItem>
                                 <DropdownMenuItem>Support</DropdownMenuItem>
                                 <DropdownMenuItem disabled>API</DropdownMenuItem> */}
-                                {/* <DropdownMenuSeparator /> */}
-                                <DropdownMenuItem onClick={() => signOut({
-                                    redirectTo: "/login",
-                                })}>
-                                    Log out
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
-                        :
-                        <div className="space-x-2">
-                            <Link href={"/login"} className={cn(buttonVariants({ variant: "outline" }))}>
-                                Login
-                            </Link>
-                            <Link href={"/register"} className={cn(buttonVariants({ variant: "default" }))}>
-                                Daftar
-                            </Link>
-                        </div>
+                                    {/* <DropdownMenuSeparator /> */}
+                                    <DropdownMenuItem onClick={() => signOut({
+                                        redirectTo: "/login",
+                                    })}>
+                                        Log out
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                            :
+                            <div className="space-x-2">
+                                <Link href={"/login"} className={cn(buttonVariants({ variant: "outline" }))}>
+                                    Login
+                                </Link>
+                                <Link href={"/register"} className={cn(buttonVariants({ variant: "default" }))}>
+                                    Daftar
+                                </Link>
+                            </div>
                 }
 
 

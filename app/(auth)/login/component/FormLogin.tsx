@@ -13,16 +13,8 @@ import { UserLoginSchema, UserLoginType } from "@/types/userLogin";
 import { useMutation } from "@tanstack/react-query";
 import { LoginUser } from "../action/loginUser";
 import { CircleNotch } from "@phosphor-icons/react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
 
 export default function FormLogin() {
-    const router = useRouter();
-    const { data: session } = useSession();
-
-    if(session) {
-        router.push("/");
-    }
 
     const formLogin = useForm<UserLoginType>({
         resolver: zodResolver(UserLoginSchema),

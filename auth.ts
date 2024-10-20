@@ -4,15 +4,11 @@ import { verifyPassword } from "./lib/utils"
 import { db } from "./db";
 
 class UserNotFoundError extends CredentialsSignin {
-  code = "Email not found"
+  code = "Email atau Password salah"
 }
 
 class UserNotVerifiedError extends CredentialsSignin {
-  code = "Email not verified"
-}
-
-class PasswordInvalidError extends CredentialsSignin {
-  code = "Invalid Password"
+  code = "Email belum terverifikasi"
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -31,14 +27,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new UserNotFoundError();
         }
 
-        if(!user.isEmailVerified) {
-          throw new UserNotVerifiedError();
-        }
-
         const isPasswordValid = await verifyPassword(credentials!.password as string, user.password);
 
         if (!isPasswordValid) {
-          throw new PasswordInvalidError();
+          throw new UserNotFoundError();
+        }
+
+        if(!user.isEmailVerified) {
+          throw new UserNotVerifiedError();
         }
 
         return {

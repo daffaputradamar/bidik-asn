@@ -1,5 +1,5 @@
 import BannerCarouselAd from "./components/BannerCarouselAd";
-import TableRiwayatPengerjaan from "./components/TableRiwayatPengerjaan";
+import TableRiwayatPengerjaan from "./components/riwayat-pengerjaan/TableRiwayatPengerjaan";
 import YoutubeAd from "./components/YoutubeAd";
 
 export default function Dashboard() {

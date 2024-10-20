@@ -2,8 +2,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import FormRegister from "./component/FormRegister";
 import Link from "next/link";
 import Logo from "@/components/icon/logo";
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
-export default function Register() {
+export default async function Register() {
+    
+    const session = await auth()
+    if(session?.user) {
+        redirect("/");
+    }
 
     return (
         <div className="w-full min-h-screen bg-[#5FBDFF] relative overflow-hidden bg-cover bg-center"
