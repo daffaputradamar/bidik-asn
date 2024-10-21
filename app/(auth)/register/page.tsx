@@ -14,7 +14,7 @@ export default async function Register() {
 
     return (
         <div className="w-full min-h-screen bg-[#5FBDFF] relative overflow-hidden bg-cover bg-center"
-            style={{ backgroundImage: "url('/assets/images/bg_auth.png')" }}>
+            style={{ backgroundImage: "url('/assets/images/bg_auth_2.png')" }}>
             {/* Card container with z-20 to ensure it stays above the SVGs */}
             <div className="flex justify-center items-center min-h-screen relative z-20">
                 <Card className="py-10 px-4 w-full mx-4 md:w-1/2 my-4">

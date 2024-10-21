@@ -16,12 +16,14 @@ const SidebarItem = ({
     label,
     icon,
     clickCallback,
+    soon = false,
     submenu = false
 }: {
     link?: string;
     label: string;
     icon?: React.ReactNode; // Add the icon prop
     clickCallback?: () => void;
+    soon?: boolean;
     submenu?: boolean;
 }) => {
     const pathname = usePathname();
@@ -40,8 +42,8 @@ const SidebarItem = ({
                 href={link || "#"}
                 className={cn(
                     buttonVariants({ variant: "ghost" }),
-                    "w-full justify-start py-6 text-base",
-                    isActive && "bg-primary-light text-primary-light-foreground",
+                    "w-full justify-start py-6",
+                    isActive && "bg-primary-light text-primary-light-foreground font-bold",
                     "transition-colors duration-300 ease-in-out text-wrap"
                 )}
                 onClick={() => {
@@ -50,6 +52,7 @@ const SidebarItem = ({
             >
                 {icon && <span className="mr-5">{icon}</span>}
                 {label}
+                {soon && <div className="rounded-full bg-accent text-black text-xs px-1 font-bold ml-2">Soon</div>}
             </Link>
         </div>
     );
@@ -136,7 +139,7 @@ export default function SidebarContent({ title = true }: { title?: boolean }) {
                                 </CollapsibleTrigger>
 
                                 <CollapsibleContent>
-                                    <div className="space-y-1 pr-6">
+                                    <div className="space-y-1 pr-4">
                                         {group.items.map((subItem, subItemIndex) => (
                                             <div key={subItemIndex}>
                                                 {
@@ -145,6 +148,7 @@ export default function SidebarContent({ title = true }: { title?: boolean }) {
                                                         link={subItem.link}
                                                         label={subItem.label}
                                                         icon={subItem.icon}
+                                                        soon={subItem.isSoon}
                                                     />
                                                 }
 
@@ -167,6 +171,7 @@ export default function SidebarContent({ title = true }: { title?: boolean }) {
                                                                 {subItem.items.map((childItem) => (
                                                                     <SidebarItem
                                                                         submenu
+                                                                        soon={childItem.isSoon}
                                                                         key={childItem.label}
                                                                         label={childItem.label}
                                                                         link={childItem.link}

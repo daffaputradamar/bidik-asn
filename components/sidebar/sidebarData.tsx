@@ -3,12 +3,14 @@ import { ArrowFatLineUp, CalendarDot, ChartBar, Clipboard, Exam, Gauge, Gift, Gr
 type SidebarSubItemType = {
     label: string;
     link?: string;
+    isSoon?: boolean;
 };
 
 type SidebarItemType = {
     label: string;
     icon: JSX.Element;
     link?: string;
+    isSoon?: boolean;
     items?: SidebarSubItemType[];
 };
 
@@ -129,13 +131,17 @@ export const userSidebarItems : SidebarGroupType[] = [
                 icon: <GridFour size={24} />,
             },
             {
+                label: "List Harga Paket",
+                icon: <ListChecks size={24} />,
+            },
+            {
                 label: "Bimbel Saya",
                 icon: <Gift size={24} />,
             },
             {
-                label: "List Harga Paket",
-                icon: <ListChecks size={24} />,
-            },
+                label: "Nilai & Pembahasan",
+                icon: <ChartBar size={24} />,
+            }
         ]
     },
     {
@@ -145,25 +151,15 @@ export const userSidebarItems : SidebarGroupType[] = [
             {
                 label: "Kelas Intensif",
                 icon: <CalendarDot size={24} />,
+                isSoon: true
             },
             {
                 label: "Tryout",
                 icon: <Clipboard size={24} />,
-                items: [
-                    {
-                        label: "Tryout Gratis",
-                    },
-                    {
-                        label: "Tryout Premium",
-                    },
-                    {
-                        label: "Tryout Akbar",
-                    }
-                ]
             },
             {
-                label: "Nilai & Pembahasan",
-                icon: <ChartBar size={24} />,
+                label: "Tryout Akbar",
+                icon: <Clipboard size={24} />,
             }
         ]
     },
@@ -174,25 +170,15 @@ export const userSidebarItems : SidebarGroupType[] = [
             {
                 label: "Kelas Intensif",
                 icon: <CalendarDot size={24} />,
+                isSoon: true
             },
             {
                 label: "Tryout",
                 icon: <Clipboard size={24} />,
-                items: [
-                    {
-                        label: "Tryout Gratis",
-                    },
-                    {
-                        label: "Tryout Premium",
-                    },
-                    {
-                        label: "Tryout Akbar",
-                    }
-                ]
             },
             {
-                label: "Nilai & Pembahasan",
-                icon: <ChartBar size={24} />,
+                label: "Tryout Akbar",
+                icon: <Clipboard size={24} />,
             }
         ]
     },
@@ -203,29 +189,19 @@ export const userSidebarItems : SidebarGroupType[] = [
             {
                 label: "Kelas Intensif",
                 icon: <CalendarDot size={24} />,
+                isSoon: true
             },
             {
                 label: "Tryout",
                 icon: <Clipboard size={24} />,
-                items: [
-                    {
-                        label: "Tryout Gratis",
-                    },
-                    {
-                        label: "Tryout Premium",
-                    },
-                    {
-                        label: "Tryout Akbar",
-                    }
-                ]
+            },
+            {
+                label: "Tryout Akbar",
+                icon: <Clipboard size={24} />,
             },
             {
                 label: "Materi",
                 icon: <List size={24} />,
-            },
-            {
-                label: "Nilai & Pembahasan",
-                icon: <ChartBar size={24} />,
             }
         ]
     },
@@ -236,25 +212,15 @@ export const userSidebarItems : SidebarGroupType[] = [
             {
                 label: "Kelas Intensif",
                 icon: <CalendarDot size={24} />,
+                isSoon: true
             },
             {
                 label: "Tryout",
                 icon: <Clipboard size={24} />,
-                items: [
-                    {
-                        label: "Tryout Gratis",
-                    },
-                    {
-                        label: "Tryout Premium",
-                    },
-                    {
-                        label: "Tryout Akbar",
-                    }
-                ]
             },
             {
-                label: "Nilai & Pembahasan",
-                icon: <ChartBar size={24} />,
+                label: "Tryout Akbar",
+                icon: <Clipboard size={24} />,
             }
         ]
     },
