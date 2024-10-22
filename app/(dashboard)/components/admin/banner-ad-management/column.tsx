@@ -2,7 +2,7 @@ import { DeleteAdBanner, UpdateAdBanner } from "@/app/(dashboard)/action/adBanne
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { DataTableColumnHeader } from "@/components/ui/data-table";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, FormRootError } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
@@ -191,7 +191,7 @@ const EditAdBannerDialog = ({ open, setOpen, adBanner }: { open: boolean, setOpe
             formData.append("link", values.link);
             formData.append("file", values.file)
             updateAdBanner({ id: adBanner.id, form: formData })
-        } catch (e) {
+        } catch {
             toast.error("Something went wrong", {
                 id: "update-ad-banner",
             });

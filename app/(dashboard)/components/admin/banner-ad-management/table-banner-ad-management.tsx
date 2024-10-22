@@ -63,7 +63,7 @@ const AddAdBannerDialog = () => {
             formData.append("link", values.link);
             formData.append("file", values.file)
             createAdBanner(formData)
-        } catch (e) {
+        } catch {
             toast.error("Something went wrong", {
                 id: "create-ad-banner",
             });
