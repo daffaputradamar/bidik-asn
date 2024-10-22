@@ -1,5 +1,6 @@
 import {
   boolean,
+  pgTable,
   pgTableCreator,
   serial,
   timestamp,
@@ -36,4 +37,14 @@ export const users = createTable('users', {
 
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
+});
+
+export const adBanners = pgTable("ad_banners", {
+  id: serial("id").primaryKey(),
+  title: varchar("title").notNull(),
+  description: varchar("description"),
+  link: varchar("link").notNull(),
+  fileName: varchar("file_name").notNull(),
+  filePath: varchar("file_path").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });

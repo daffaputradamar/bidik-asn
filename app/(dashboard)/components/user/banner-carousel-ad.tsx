@@ -2,24 +2,11 @@
 
 import { Card, CardContent } from "@/components/ui/card";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
+import { AdBannerDBType } from "@/types/adBanner";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react/dist/ssr";
 import Autoplay from "embla-carousel-autoplay"
 
-export default function BannerCarouselAd() {
-    const bannerItems = [
-        {
-            image: "/placeholder.svg?height=400&width=800",
-            title: "Space Iklan",
-        },
-        {
-            image: "/placeholder.svg?height=400&width=800",
-            title: "Space Iklan",
-        },
-        {
-            image: "/placeholder.svg?height=400&width=800",
-            title: "Space Iklan",
-        },
-    ]
+export default function BannerCarouselAd({ adBanners }: { adBanners: AdBannerDBType[] }) {
 
     return (
         <Carousel className="w-full mx-auto relative" opts={{
@@ -31,12 +18,12 @@ export default function BannerCarouselAd() {
             })
         ]}>
             <CarouselContent>
-                {bannerItems.map((item, index) => (
+                {adBanners.map((item, index) => (
                     <CarouselItem key={index}>
                         <Card className="border-0 rounded-xl">
                             <CardContent className="p-0 relative aspect-[3/1] md:aspect-[5/1]">
                                 <img
-                                    src={item.image}
+                                    src={item.filePath}
                                     alt={item.title}
                                     className="w-full h-full object-cover"
                                 />

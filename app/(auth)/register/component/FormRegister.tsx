@@ -107,18 +107,7 @@ export default function FormRegister() {
     });
 
     const handleRegister = async (values: UserRegisterType) => {
-        try {
-            toast.loading("Registering user...", {
-                id: "register-user",
-            });
-
-            await registerUser(values);
-
-        } catch {
-            formRegister.setError('root', {
-                message: 'An error occurred during register'
-            })
-        }
+        await registerUser(values);
     }
 
     return (

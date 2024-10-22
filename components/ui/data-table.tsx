@@ -21,16 +21,15 @@ import {
 import { Button } from "./button"
 import { useState } from "react"
 
-import { Column } from "@tanstack/react-table" 
+import { Column } from "@tanstack/react-table"
 import { cn } from "@/lib/utils"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { ArrowDown, ArrowUp, CaretUpDown, EyeSlash } from "@phosphor-icons/react"
+import { ArrowDown, ArrowUp, CaretDoubleLeft, CaretDoubleRight, CaretLeft, CaretRight, CaretUpDown } from "@phosphor-icons/react"
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -42,6 +41,8 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
+  const [pageIndex, setPageIndex] = useState(0);
+  const [pageSize, setPageSize] = useState(5);
 
   const table = useReactTable({
     data,
@@ -52,6 +53,7 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     state: {
       sorting,
+      pagination: { pageIndex, pageSize }
     },
   })
 
@@ -68,9 +70,9 @@ export function DataTable<TData, TValue>({
                       {header.isPlaceholder
                         ? null
                         : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
                     </TableHead>
                   )
                 })}
@@ -101,43 +103,64 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex justify-center md:justify-end items-center space-x-2 py-2">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.setPageIndex(0)}
+          disabled={!table.getCanPreviousPage()}
+        >
+          <CaretDoubleLeft weight="bold" />
+        </Button>
         <Button
           variant="outline"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
         >
-          Previous
+          <CaretLeft weight="bold" />
         </Button>
+
+        <span className="text-sm font-semibold">
+          {table.getState().pagination.pageIndex + 1} of {table.getPageCount()}
+        </span>
+
         <Button
           variant="outline"
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
         >
-          Next
+          <CaretRight weight="bold" />
+        </Button>
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          disabled={!table.getCanNextPage()}
+        >
+          <CaretDoubleRight weight="bold" />
         </Button>
       </div>
     </div>
   )
 }
- 
+
 interface DataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
   column: Column<TData, TValue>
   title: string
 }
- 
+
 export function DataTableColumnHeader<TData, TValue>({
   column,
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) {
   if (!column.getCanSort()) {
-    return <div className={cn(className)}>{title}</div>
+    return <div className={cn('text-sm', className)}>{title}</div>
   }
- 
+
   return (
     <div className={cn("flex items-center space-x-2", className)}>
       <DropdownMenu>
@@ -147,13 +170,13 @@ export function DataTableColumnHeader<TData, TValue>({
             size="sm"
             className="data-[state=open]:bg-accent data-[state=open]:text-accent-foreground"
           >
-            <span className="font-bold text-base">{title}</span>
+            <span className="font-bold text-sm">{title}</span>
             {column.getIsSorted() === "desc" ? (
               <ArrowDown className="ml-2" />
             ) : column.getIsSorted() === "asc" ? (
               <ArrowUp className="ml-2" />
             ) : (
-              <CaretUpDown  className="ml-2" />
+              <CaretUpDown className="ml-2" />
             )}
           </Button>
         </DropdownMenuTrigger>

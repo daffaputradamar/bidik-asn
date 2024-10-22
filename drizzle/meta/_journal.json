@@ -29,6 +29,13 @@
       "when": 1729351162863,
       "tag": "0003_yellow_shiva",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1729590234467,
+      "tag": "0004_early_jackpot",
+      "breakpoints": true
     }
   ]
 }
