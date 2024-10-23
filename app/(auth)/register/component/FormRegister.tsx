@@ -137,7 +137,7 @@ export default function FormRegister() {
                                 <FormItem>
                                     <FormLabel>Alamat Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="example@domain.com" {...field} />
+                                        <Input type="email" placeholder="example@domain.com" {...field} />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>

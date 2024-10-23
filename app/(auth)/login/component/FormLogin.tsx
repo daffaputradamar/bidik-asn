@@ -68,7 +68,7 @@ export default function FormLogin() {
                             <FormItem>
                                 <FormLabel>Alamat Email</FormLabel>
                                 <FormControl>
-                                    <Input 
+                                    <Input type="email"
                                     placeholder="example@domain.com" {...field} />
                                 </FormControl>
                                 <FormMessage />
