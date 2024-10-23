@@ -1,0 +1,1 @@
+ALTER TABLE "ad_youtubes" ALTER COLUMN "description" SET NOT NULL;

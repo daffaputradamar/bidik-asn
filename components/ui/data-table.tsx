@@ -58,7 +58,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (
-    <div >
+    <div>
       <div className="rounded-md border">
         <Table>
           <TableHeader className="bg-gray-100">
@@ -107,7 +107,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.setPageIndex(0)}
+          onClick={() => setPageIndex(0)}
           disabled={!table.getCanPreviousPage()}
         >
           <CaretDoubleLeft weight="bold" />
@@ -115,7 +115,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.previousPage()}
+          onClick={() => setPageIndex((pageIndex) => pageIndex - 1)}
           disabled={!table.getCanPreviousPage()}
         >
           <CaretLeft weight="bold" />
@@ -128,7 +128,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.nextPage()}
+          onClick={() => setPageIndex((pageIndex) => pageIndex + 1)}
           disabled={!table.getCanNextPage()}
         >
           <CaretRight weight="bold" />
@@ -136,7 +136,7 @@ export function DataTable<TData, TValue>({
         <Button
           variant="outline"
           size="sm"
-          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          onClick={() => setPageIndex(table.getPageCount() - 1)}
           disabled={!table.getCanNextPage()}
         >
           <CaretDoubleRight weight="bold" />

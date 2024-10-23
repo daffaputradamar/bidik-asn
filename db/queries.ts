@@ -8,3 +8,11 @@ export const getAdBanners = async () => {
 
   return banners;
 };
+
+export const getAdYoutubes = async () => {
+  const youtubes = await db.query.adYoutube.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  });
+
+  return youtubes;
+};

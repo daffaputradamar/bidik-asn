@@ -11,7 +11,7 @@ const SidebarContext = createContext<SidebarContextProps | undefined>(undefined)
 
 export const SidebarProvider = ({ children }: { children: React.ReactNode }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const isDesktop = useMediaQuery("(min-width: 769px)");
 
   useEffect(() => {
     setIsOpen(isDesktop);

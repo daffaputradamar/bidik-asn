@@ -10,7 +10,7 @@ import SidebarContent from "./sidebar-content"
 const DesktopSidebar = ({ isSidebarOpen }: { isSidebarOpen: boolean }) => (
     <aside
         className={`${isSidebarOpen ? "w-64" : "w-0"
-            } h-screen overflow-y-auto overflow-x-hidden border-r bg-white transition-all duration-300 ease-in-out hidden md:block scrollbar`}
+            } h-screen sticky top-0 overflow-y-auto overflow-x-hidden border-r bg-white transition-all duration-300 ease-in-out hidden md:block scrollbar`}
     >
         <SidebarContent />
     </aside>
@@ -40,7 +40,7 @@ const MobileSidebar = ({ isOpen, closeSidebar }: { isOpen: boolean, closeSidebar
 
 export default function Sidebar() {
     const { isOpen, closeSidebar } = useSidebar();
-    const isMobile = useMediaQuery("(max-width: 767px)");
+    const isMobile = useMediaQuery("(max-width: 769px)");
 
     return (
         <>

@@ -48,3 +48,11 @@ export const adBanners = pgTable("ad_banners", {
   filePath: varchar("file_path").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const adYoutube = pgTable("ad_youtubes", {
+  id: serial("id").primaryKey(),
+  link: varchar("link").notNull(),
+  description: varchar("description").notNull(),
+  thumbnail: varchar("thumbnail").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
