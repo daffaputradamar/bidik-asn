@@ -9,7 +9,7 @@ import { EventCalendarType } from "@/types/eventCalendar"
 
 const weekDays = ['MIN', 'SEN', 'SEL', 'RAB', 'KAM', 'JUM', 'SAB']
 
-const events: EventCalendarType[] = [
+const _events: EventCalendarType[] = [
     {
         id: 1,
         title: "Webinar TWK",

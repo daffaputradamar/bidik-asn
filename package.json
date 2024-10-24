@@ -13,6 +13,7 @@
     "db:seed:wilayah": "node scripts/generateWilayah.js"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-react": "^9.3.1",
     "@hookform/resolvers": "^3.9.0",
     "@neondatabase/serverless": "^0.10.1",
     "@phosphor-icons/react": "^2.1.7",
@@ -54,6 +55,7 @@
     "@tiptap/starter-kit": "^2.9.1",
     "axios": "^1.7.7",
     "bcryptjs": "^2.4.3",
+    "ckeditor5": "^43.2.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",

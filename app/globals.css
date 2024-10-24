@@ -112,3 +112,20 @@ body {
 .ProseMirror:focus {
   outline: none;
 }
+
+@media print {
+	body {
+		margin: 0 !important;
+	}
+}
+
+.main-container {
+  @apply w-full;
+}
+
+
+.editor-container_classic-editor .editor-container__editor {
+	min-width: 100% !important;
+	max-width: 100% !important;
+  @apply prose;
+}

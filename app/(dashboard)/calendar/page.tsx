@@ -9,7 +9,7 @@ export default async function Calendar() {
 
   return (
     <div className="container mx-auto">
-      <div className="flex items-center mb-4">
+      <div className="flex flex-col mb-4 gap-2">
         <h1 className="text-2xl font-bold">Kalender</h1>
         {
           session?.user.role === "admin" && <AddEvent />
