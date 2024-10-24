@@ -104,3 +104,11 @@ body {
     background: theme('colors.gray.100');
   }
 }
+
+.editor .ProseMirror {
+  min-height: 150px;
+  padding: 10px 20px;
+}
+.ProseMirror:focus {
+  outline: none;
+}

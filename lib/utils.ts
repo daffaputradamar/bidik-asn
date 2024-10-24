@@ -19,3 +19,22 @@ export const verifyPassword = async (password: string, hash: string) => {
 export const stripHtmlTags = (str: string) => { 
   return str.replace(/<\/?[^>]+(>|$)/g, "");
 }
+
+export function DateToUTCDateTime(date: Date) {
+  return new Date(
+    Date.UTC(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      date.getMinutes(),
+      date.getSeconds(),
+      date.getMilliseconds()
+    )
+  );
+}
+
+export function DateToUTCDate(date: Date): Date {
+  const utcDate = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  return utcDate;
+}

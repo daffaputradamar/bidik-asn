@@ -5,58 +5,34 @@ import { useState } from "react"
 import EventList from "./EventList"
 import { Button } from "@/components/ui/button"
 import { CaretLeft, CaretRight } from "@phosphor-icons/react"
-
-const events = [
-    {
-        id: 1,
-        title: "Webinar TWK",
-        startDate: new Date(2024, 9, 3),
-        endDate: new Date(2024, 9, 3),
-        time: "00:01 WIB",
-        location: "56 Davion Mission Suite 157",
-        color: "#a855f7"
-    },
-    {
-        id: 2,
-        title: "Pembukaan Tes SKD CPNS 2024",
-        startDate: new Date(2024, 9, 16),
-        endDate: new Date(2024, 9, 16),
-        time: "Official BKN",
-        location: "",
-        color: "#ec4899"
-    },
-    {
-        id: 3,
-        title: "Tryout Akbar Gratis",
-        startDate: new Date(2024, 9, 20),
-        endDate: new Date(2024, 9, 22),
-        time: "08:00 WIB",
-        location: "Spesial FR",
-        color: "#f97316"
-    },
-    {
-        id: 4,
-        title: "Flash Sale Special Day",
-        startDate: new Date(2024, 9, 25),
-        endDate: new Date(2024, 9, 25),
-        time: "00:01 - 23:59 WIB",
-        location: "Event 25 Oktober Sale",
-        color: "#3b82f6"
-    },
-    {
-        id: 5,
-        title: "Flash Sale Special Day",
-        startDate: new Date(2024, 8, 25),
-        endDate: new Date(2024, 8, 25),
-        time: "00:01 - 23:59 WIB",
-        location: "Event 25 Oktober Sale",
-        color: "#3b82f6"
-    },
-]
+import { EventCalendarType } from "@/types/eventCalendar"
 
 const weekDays = ['MIN', 'SEN', 'SEL', 'RAB', 'KAM', 'JUM', 'SAB']
 
-export default function CalendarView() {
+const events: EventCalendarType[] = [
+    {
+        id: 1,
+        title: "Webinar TWK",
+        dtfrom: new Date(2024, 9, 3),
+        dtto: new Date(2024, 9, 3),
+        eventCategory: "Webinar",
+        description: "56 Davion Mission Suite 157",
+        eventCategoryColor: "#a855f7",
+        createdAt: new Date()
+    },
+    {
+        id: 1,
+        title: "BKN",
+        dtfrom: new Date(2024, 9, 5),
+        dtto: new Date(2024, 9, 10),
+        eventCategory: "Official BKN",
+        description: "56 Davion Mission Suite 157",
+        eventCategoryColor: "#a855f7",
+        createdAt: new Date()
+    },
+]
+
+export default function CalendarView({ events }: { events: EventCalendarType[] }) {
     const currentDate = new Date()
     const [currentMonth, setCurrentMonth] = useState(new Date(currentDate.getFullYear(), currentDate.getMonth(), 1))
 
@@ -78,18 +54,18 @@ export default function CalendarView() {
     const allDays = [...prevMonthDays, ...daysInMonth, ...nextMonthDays]
 
     const getEventsForDay = (day: Date) => {
-        return events.filter(event =>
-            isWithinInterval(day, { start: event.startDate, end: event.endDate })
-        )
+        return events.filter(event => {
+            return isWithinInterval(day, { start: event.dtfrom, end: event.dtto })
+        })
     }
 
-    const isFirstDayOfEvent = (day: Date, event: typeof events[0]) => {
-        return isSameDay(day, event.startDate)
+    const isFirstDayOfEvent = (day: Date, event: EventCalendarType) => {
+        return isSameDay(day, event.dtfrom)
     }
 
     const filteredEvents = events.filter(event => {
-        const eventStartMonth = event.startDate.getMonth();
-        const eventStartYear = event.startDate.getFullYear();
+        const eventStartMonth = event.dtfrom.getMonth();
+        const eventStartYear = event.dtfrom.getFullYear();
         const currentMonthValue = currentMonth.getMonth();
         const currentYearValue = currentMonth.getFullYear();
 
@@ -108,9 +84,9 @@ export default function CalendarView() {
                             <Button variant={'ghost'} onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}>
                                 <CaretLeft weight="bold" />
                             </Button>
-                            <h2 className="text-xl font-semibold">{format(currentMonth, 'MMMM') + " " + format(currentMonth, 'yyyy')}</h2> 
+                            <h2 className="text-xl font-semibold">{format(currentMonth, 'MMMM') + " " + format(currentMonth, 'yyyy')}</h2>
                             <Button variant={'ghost'} onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
-                                <CaretRight weight="bold"/>
+                                <CaretRight weight="bold" />
                             </Button>
                         </div>
                         <div className="grid grid-cols-7 gap-px bg-gray-200">
@@ -123,6 +99,7 @@ export default function CalendarView() {
                                 const isCurrentMonth = day.getMonth() === currentMonth.getMonth()
                                 const isToday = isSameDay(day, new Date())
                                 const eventsForDay = getEventsForDay(day)
+                                
                                 return (
                                     <div
                                         key={index}
@@ -133,10 +110,10 @@ export default function CalendarView() {
                                             {eventsForDay.map((event) => (
                                                 <div
                                                     key={event.id}
-                                                    className={`h-5 opacity-75 ${isFirstDayOfEvent(day, event) ? 'rounded-l' : ''} ${isSameDay(day, event.endDate) ? 'rounded-r' : ''}`}
+                                                    className={`h-5 opacity-75 ${isFirstDayOfEvent(day, event) ? 'rounded-l' : ''} ${isSameDay(day, event.dtto) ? 'rounded-r' : ''}`}
                                                     title={event.title}
                                                     style={{
-                                                        backgroundColor: event.color
+                                                        backgroundColor: event.eventCategoryColor
                                                     }}
                                                 >
                                                     {isFirstDayOfEvent(day, event) && (

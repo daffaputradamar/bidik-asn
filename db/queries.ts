@@ -16,3 +16,11 @@ export const getAdYoutubes = async () => {
 
   return youtubes;
 };
+
+export const getEvents = async () => {
+  const events = await db.query.eventCalendar.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  })
+
+  return events;
+};

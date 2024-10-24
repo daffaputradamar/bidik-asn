@@ -1,0 +1,1 @@
+ALTER TABLE "events_calendar" ADD COLUMN "title" varchar NOT NULL;

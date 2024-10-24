@@ -1,8 +1,10 @@
 import {
   boolean,
+  pgEnum,
   pgTable,
   pgTableCreator,
   serial,
+  text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
@@ -54,5 +56,18 @@ export const adYoutube = pgTable("ad_youtubes", {
   link: varchar("link").notNull(),
   description: varchar("description").notNull(),
   thumbnail: varchar("thumbnail").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+
+export const eventCategoryEnum = pgEnum('event_category', ['Official BKN', 'Event', 'Webinar', 'TO Akbar']);
+export const eventCalendar = pgTable("events_calendar", {
+  id: serial("id").primaryKey(),
+  title: varchar("title").notNull(),
+  dtfrom: timestamp("dtfrom").notNull(),
+  dtto: timestamp("dtto").notNull(),
+  description: text("description").notNull(),
+  eventCategory: eventCategoryEnum("event_category").notNull(),
+  eventCategoryColor: varchar("category_color").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

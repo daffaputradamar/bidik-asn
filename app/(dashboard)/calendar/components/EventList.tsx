@@ -1,16 +1,9 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { EventCalendarType } from "@/types/eventCalendar";
 import { format } from "date-fns";
 
 export default function EventList({ events }: {
-    events: {
-        id: number;
-        title: string;
-        startDate: Date;
-        endDate: Date;
-        time: string;
-        location: string;
-        color: string;
-    }[]
+    events: EventCalendarType[]
 }) {
     return (
         <Card className="bg-white shadow-sm overflow-y-auto">
@@ -24,18 +17,17 @@ export default function EventList({ events }: {
                     (events && events.length > 0) && events.map((event, i) => (
                         <div key={event.id}>
                             <div className="flex gap-4 p-5">
-                                <div className={`w-12 h-12 min-w-[48px] min-h-[48px] rounded-full flex items-center justify-center text-white font-bold text-lg`} style={{ backgroundColor: event.color}}>
-                                    {format(event.startDate, 'd')}
+                                <div className={`w-12 h-12 min-w-[48px] min-h-[48px] rounded-full flex items-center justify-center text-white font-bold text-lg`} style={{ backgroundColor: event.eventCategoryColor}}>
+                                    {format(event.dtfrom, 'd')}
                                 </div>
                                 <div>
                                     <h3 className="font-semibold" style={{
-                                        color: event.color
+                                        color: event.eventCategoryColor
                                     }}>{event.title}</h3>
                                     <p className="text-sm text-gray-500">
-                                        {format(event.startDate, 'dd MMM')} - {format(event.endDate, 'dd MMM')}
+                                        {format(event.dtfrom, 'dd MMM')} - {format(event.dtto, 'dd MMM')}
                                     </p>
-                                    <p className="text-sm text-gray-500">{event.time}</p>
-                                    {event.location && <p className="text-sm text-gray-500">{event.location}</p>}
+                                    <div className="text-sm text-gray-500" dangerouslySetInnerHTML={{ __html: event.description}}></div>
                                 </div>
                             </div>
                             {i !== events.length - 1 && <hr />}
